@@ -1,5 +1,6 @@
 # Supermarket-Program
 Java-Projectgroup
+
 ===== Supermarket System =====
 1. Login System
     - Admin(สามารถจัดการ/แก้ไขข้อมูลได้)
@@ -16,4 +17,5 @@ Java-Projectgroup
 4. Sales Report
    - รายงานยอดขายหลังจากออกโปรแกรม
 5. Exit Program
+
 ===================================
