@@ -2,8 +2,8 @@
 Java-Projectgroup
 
 ===== Supermarket System =====
-(main)
-1. Login System(โปเต้)
+
+1. Login System(โปเต้)(main)
     - Admin(สามารถจัดการ/แก้ไขข้อมูลได้)
     - Cashier(สำหรับขายของ)
 2. Product Management (บอม)
