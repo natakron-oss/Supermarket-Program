@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
@@ -148,69 +149,7 @@ public class Supermarket_Program {
             loginSystem();
         }
     }
-}
-
-public class bom {
-    public static void main(String[] args) {
-        Scanner input =new Scanner(System.in);
-        boolean costumer=true;
-        System.out.print("Enter Number of product types: ");
-        int n=input.nextInt();
-        String[] productNames=new String[n];
-        double[] productPrices=new double[n];
-        double[] productquantity=new double[n];
-        for (int i = 0; i < n; i++) {
-            System.out.print("Enter product name "+(i+1)+": ");
-            productNames[i]=input.next();
-            System.out.print("Enter product price (bath) "+(i+1)+": ");
-            productPrices[i]=input.nextDouble();
-            System.out.print("Enter product quantity "+(i+1)+": ");
-            productquantity[i]=input.nextDouble();
-        }
-        displayProducts(productNames, productPrices, productquantity);
-        input.nextLine(); 
-        while(costumer){
-            System.err.print("Do you want to edit the product?(yes/no):");
-            String answer=input.nextLine().toLowerCase();
-            if(answer.equals("yes")){
-                System.out.println("What do you want to do with the product?");
-                System.out.print("Add product(add) / Remove product(remove)/ Update product(update):");
-                String action=input.nextLine().toLowerCase();
-                switch (action) {
-                    case "add":
-                        Object[] resultupdate = addProduct(productNames, productPrices, productquantity);
-                        productNames = (String[]) resultupdate[0];
-                        productPrices = (double[]) resultupdate[1];
-                        productquantity = (double[]) resultupdate[2];
-                        displayProducts(productNames, productPrices, productquantity); 
-                    break;
-                    case "remove":
-                        Object[] resultremove = removeProduct(productNames, productPrices, productquantity);
-                        productNames = (String[]) resultremove[0];
-                        productPrices = (double[]) resultremove[1];
-                        productquantity = (double[]) resultremove[2];
-                        displayProducts(productNames, productPrices, productquantity);
-                    break;
-                    case "update": 
-                        Object[] resultchange = UpdateProduct(productNames, productPrices, productquantity);
-                        productNames = (String[]) resultchange[0];
-                        productPrices = (double[]) resultchange[1];
-                        productquantity = (double[]) resultchange[2];
-                        displayProducts(productNames, productPrices, productquantity);
-                    break;
-                    default:
-                        System.out.println("Invalid action. Please choose add, remove, or update.");
-                        continue;
-                }
-            }else if(answer.equals("no")){
-                System.out.println("Thank you for using our system.");
-                costumer=false;
-            }else{
-                System.out.println("Invalid input, please enter 'yes' or 'no'.");
-                continue;
-            }
-        }
-    }
+    //เมดธอน แสดงรายการสินค้า
     public static void displayProducts(String[] names, double[] prices, double[] quantitiy) {
         System.out.println("Product List:");
         System.out.println();
@@ -222,6 +161,7 @@ public class bom {
             System.out.println();
         }
     }
+    //เมดธอน เพิ่มสินค้า
     public static Object[] addProduct(String[] names, double[] prices, double[] quantity) {
         int newSize = names.length + 1;
         String[] updatedNames = Arrays.copyOf(names, names.length + 1);
@@ -236,6 +176,7 @@ public class bom {
         updatedQuantity[newSize - 1] = input.nextDouble();
         return new Object[]{updatedNames, updatedPrices, updatedQuantity};
     }
+    //เมดธอน ลบสินค้า
     public static Object[] removeProduct(String[] names, double[] prices, double[] quantity) {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the product number to remove: ");
@@ -259,6 +200,7 @@ public class bom {
         }
         return new Object[]{updatedNames, updatedPrices, updatedQuantity};
     }
+    //เมดธอน แก้ไขสินค้า
     public static Object[] UpdateProduct(String[] names, double[] prices, double[] quantity) {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the product number to change: ");
@@ -278,3 +220,6 @@ public class bom {
         return new Object[]{names, prices, quantity};
     }
 }
+
+
+    
