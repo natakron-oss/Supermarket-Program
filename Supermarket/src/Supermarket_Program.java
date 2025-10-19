@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
@@ -149,7 +148,8 @@ public class Supermarket_Program {
             loginSystem();
         }
     }
-    //เมดธอน แสดงรายการสินค้า
+
+    //สำหรับเเสดงสินค้า
     public static void displayProducts(String[] names, double[] prices, double[] quantitiy) {
         System.out.println("Product List:");
         System.out.println();
@@ -161,12 +161,17 @@ public class Supermarket_Program {
             System.out.println();
         }
     }
-    //เมดธอน เพิ่มสินค้า
+    //สำหรับเพิ่มสินค้า
     public static Object[] addProduct(String[] names, double[] prices, double[] quantity) {
         int newSize = names.length + 1;
-        String[] updatedNames = Arrays.copyOf(names, names.length + 1);
-        double[] updatedPrices = Arrays.copyOf(prices, prices.length + 1);
-        double[] updatedQuantity = Arrays.copyOf(quantity, quantity.length + 1);
+        String[] updatedNames = new String[newSize];
+        double[] updatedPrices = new double[newSize];
+        double[] updatedQuantity = new double[newSize];
+        for (int i = 0; i < names.length; i++) {
+            updatedNames[i] = names[i];
+            updatedPrices[i] = prices[i];
+            updatedQuantity[i] = quantity[i];
+        }
         Scanner input = new Scanner(System.in);
         System.out.print("Enter new product name: ");
         updatedNames[newSize - 1] = input.nextLine();
@@ -176,7 +181,7 @@ public class Supermarket_Program {
         updatedQuantity[newSize - 1] = input.nextDouble();
         return new Object[]{updatedNames, updatedPrices, updatedQuantity};
     }
-    //เมดธอน ลบสินค้า
+    //สำหรับลบสินค้า
     public static Object[] removeProduct(String[] names, double[] prices, double[] quantity) {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the product number to remove: ");
@@ -200,7 +205,7 @@ public class Supermarket_Program {
         }
         return new Object[]{updatedNames, updatedPrices, updatedQuantity};
     }
-    //เมดธอน แก้ไขสินค้า
+    //สำหรับเเก้ไขสินค้า
     public static Object[] UpdateProduct(String[] names, double[] prices, double[] quantity) {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the product number to change: ");
@@ -221,5 +226,3 @@ public class Supermarket_Program {
     }
 }
 
-
-    
