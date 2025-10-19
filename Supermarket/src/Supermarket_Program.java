@@ -149,3 +149,132 @@ public class Supermarket_Program {
         }
     }
 }
+
+public class bom {
+    public static void main(String[] args) {
+        Scanner input =new Scanner(System.in);
+        boolean costumer=true;
+        System.out.print("Enter Number of product types: ");
+        int n=input.nextInt();
+        String[] productNames=new String[n];
+        double[] productPrices=new double[n];
+        double[] productquantity=new double[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter product name "+(i+1)+": ");
+            productNames[i]=input.next();
+            System.out.print("Enter product price (bath) "+(i+1)+": ");
+            productPrices[i]=input.nextDouble();
+            System.out.print("Enter product quantity "+(i+1)+": ");
+            productquantity[i]=input.nextDouble();
+        }
+        displayProducts(productNames, productPrices, productquantity);
+        input.nextLine(); 
+        while(costumer){
+            System.err.print("Do you want to edit the product?(yes/no):");
+            String answer=input.nextLine().toLowerCase();
+            if(answer.equals("yes")){
+                System.out.println("What do you want to do with the product?");
+                System.out.print("Add product(add) / Remove product(remove)/ Update product(update):");
+                String action=input.nextLine().toLowerCase();
+                switch (action) {
+                    case "add":
+                        Object[] resultupdate = addProduct(productNames, productPrices, productquantity);
+                        productNames = (String[]) resultupdate[0];
+                        productPrices = (double[]) resultupdate[1];
+                        productquantity = (double[]) resultupdate[2];
+                        displayProducts(productNames, productPrices, productquantity); 
+                    break;
+                    case "remove":
+                        Object[] resultremove = removeProduct(productNames, productPrices, productquantity);
+                        productNames = (String[]) resultremove[0];
+                        productPrices = (double[]) resultremove[1];
+                        productquantity = (double[]) resultremove[2];
+                        displayProducts(productNames, productPrices, productquantity);
+                    break;
+                    case "update": 
+                        Object[] resultchange = UpdateProduct(productNames, productPrices, productquantity);
+                        productNames = (String[]) resultchange[0];
+                        productPrices = (double[]) resultchange[1];
+                        productquantity = (double[]) resultchange[2];
+                        displayProducts(productNames, productPrices, productquantity);
+                    break;
+                    default:
+                        System.out.println("Invalid action. Please choose add, remove, or update.");
+                        continue;
+                }
+            }else if(answer.equals("no")){
+                System.out.println("Thank you for using our system.");
+                costumer=false;
+            }else{
+                System.out.println("Invalid input, please enter 'yes' or 'no'.");
+                continue;
+            }
+        }
+    }
+    public static void displayProducts(String[] names, double[] prices, double[] quantitiy) {
+        System.out.println("Product List:");
+        System.out.println();
+        for (int i = 0; i < names.length; i++) {
+            System.out.println("  Product numbers: " + (i+1));
+            System.out.println("  Name: " + names[i]);
+            System.out.println("  Price: " + prices[i] + " bath");
+            System.out.println("  Quantity: " + quantitiy[i]);
+            System.out.println();
+        }
+    }
+    public static Object[] addProduct(String[] names, double[] prices, double[] quantity) {
+        int newSize = names.length + 1;
+        String[] updatedNames = Arrays.copyOf(names, names.length + 1);
+        double[] updatedPrices = Arrays.copyOf(prices, prices.length + 1);
+        double[] updatedQuantity = Arrays.copyOf(quantity, quantity.length + 1);
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter new product name: ");
+        updatedNames[newSize - 1] = input.nextLine();
+        System.out.print("Enter new product price(bath): ");
+        updatedPrices[newSize - 1] = input.nextDouble();
+        System.out.print("Enter new product quantity: ");
+        updatedQuantity[newSize - 1] = input.nextDouble();
+        return new Object[]{updatedNames, updatedPrices, updatedQuantity};
+    }
+    public static Object[] removeProduct(String[] names, double[] prices, double[] quantity) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the product number to remove: ");
+        int index = input.nextInt();
+        index--;
+        if (index < 0 || index >= names.length) {
+            System.out.println("Invalid product number.");
+            return new Object[]{names, prices, quantity};
+        }
+        String[] updatedNames = new String[names.length - 1];
+        double[] updatedPrices = new double[prices.length - 1];
+        double[] updatedQuantity = new double[quantity.length - 1];
+        for (int i = 0, j = 0; i < names.length;i++){
+            if(i == index){
+                continue;
+            }
+            updatedNames[j] = names[i];
+            updatedPrices[j] = prices[i];
+            updatedQuantity[j] = quantity[i];
+            j++;
+        }
+        return new Object[]{updatedNames, updatedPrices, updatedQuantity};
+    }
+    public static Object[] UpdateProduct(String[] names, double[] prices, double[] quantity) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the product number to change: ");
+        int index = input.nextInt();
+        input.nextLine(); 
+        index--;
+        if (index < 0 || index >= names.length) {
+            System.out.println("Invalid product number.");
+            return new Object[]{names, prices, quantity};
+        }
+        System.out.print("Enter new product name: ");
+        names[index] = input.nextLine();
+        System.out.print("Enter new product price: ");
+        prices[index] = input.nextDouble();
+        System.out.print("Enter new product quantity: ");
+        quantity[index] = input.nextDouble();
+        return new Object[]{names, prices, quantity};
+    }
+}
